@@ -1,194 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="canonical" href="https://demo.themesberg.com/landwind/auth" />
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In - Talk Data To Me</title>
-
-    <!-- Meta SEO -->
-    <meta name="title" content="Sign In - Talk Data To Me">
-    <meta name="description" content="Sign in to your Talk Data To Me account to access your data insights.">
-    <meta name="robots" content="index, follow">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="language" content="English">
-
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
     <link href="./output.css" rel="stylesheet">
 </head>
-<body class="bg-gray-50 dark:bg-gray-900">
-    <!-- Header -->
-    <header class="fixed w-full z-50">
-        <nav class="bg-white border-gray-200 py-2.5 dark:bg-gray-900">
-            <div class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
-                <a href="index.html" class="flex items-center">
-                    <img src="./images/logo.svg" class="h-6 mr-3 sm:h-9" alt="Talk Data To Me Logo" />
-                    <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Talk Data To Me</span>
-                </a>
-                <div class="flex items-center lg:order-2">
-                    <a href="index.html" class="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">Back to Home</a>
-                </div>
-            </div>
-        </nav>
+<body class="min-h-screen bg-white flex flex-col">
+    <!-- Simple Header -->
+    <header class="w-full px-6 py-4">
+        <a href="index.html" class="flex items-center text-gray-900 hover:text-gray-700 transition-colors">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+            </svg>
+            Back to home
+        </a>
     </header>
 
     <!-- Main Content -->
-    <main class="flex flex-col items-center justify-center px-6 pt-8 mx-auto md:h-screen pt:mt-0 dark:bg-gray-900">
-        <a href="index.html" class="flex items-center justify-center mb-8 text-2xl font-semibold lg:mb-10 dark:text-white">
-            <img src="./images/logo.svg" class="mr-4 h-11" alt="Talk Data To Me Logo">
-            Talk Data To Me
-        </a>
-        
-        <!-- Auth Card -->
-        <div class="w-full max-w-xl p-6 space-y-8 sm:p-8 bg-white rounded-lg shadow dark:bg-gray-800">
-            <!-- Toggle Buttons -->
-            <div class="flex mb-6">
-                <button id="signin-tab" class="flex-1 py-2 px-4 text-center font-medium text-purple-600 bg-purple-50 border-b-2 border-purple-600 dark:text-purple-400 dark:bg-gray-700">
-                    Sign In
+    <main class="flex-1 flex items-center justify-center px-4 py-8">
+        <div class="w-full max-w-sm">
+            <!-- Logo -->
+            <div class="text-center mb-8">
+                <img src="./images/logo.svg" class="mx-auto h-8 mb-4" alt="Talk Data To Me">
+                <h1 class="text-2xl font-semibold text-gray-900 mb-2">Welcome back</h1>
+                <p class="text-gray-600">Sign in to your account</p>
+            </div>
+
+            <!-- Auth Toggle -->
+            <div class="flex mb-6 p-1 bg-gray-100 rounded-lg">
+                <button id="signin-tab" class="flex-1 py-2 px-3 text-sm font-medium rounded-md text-gray-900 bg-white shadow-sm">
+                    Sign in
                 </button>
-                <button id="signup-tab" class="flex-1 py-2 px-4 text-center font-medium text-gray-500 hover:text-purple-600 border-b-2 border-transparent hover:border-purple-600 dark:text-gray-400 dark:hover:text-purple-400">
-                    Sign Up
+                <button id="signup-tab" class="flex-1 py-2 px-3 text-sm font-medium rounded-md text-gray-600 hover:text-gray-900">
+                    Sign up
                 </button>
             </div>
 
             <!-- Sign In Form -->
-            <div id="signin-form">
-                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                    Welcome back
-                </h2>
-                <p class="text-gray-500 dark:text-gray-400 mb-6">
-                    Sign in to access your data insights
-                </p>
-                <form class="mt-8 space-y-6" action="#" method="POST">
-                    <div>
-                        <label for="signin-email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                        <input type="email" name="email" id="signin-email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500" placeholder="name@company.com" required="">
-                    </div>
-                    <div>
-                        <label for="signin-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-                        <input type="password" name="password" id="signin-password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500" required="">
-                    </div>
-                    <div class="flex items-start">
-                        <div class="flex items-center h-5">
-                            <input id="remember" aria-describedby="remember" type="checkbox" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        </div>
-                        <div class="ml-3 text-sm">
-                            <label for="remember" class="text-gray-500 dark:text-gray-400">Remember me</label>
-                        </div>
-                        <a href="#" class="ml-auto text-sm text-purple-700 hover:underline dark:text-purple-500">Lost Password?</a>
-                    </div>
-                    <button type="submit" class="w-full px-5 py-3 text-base font-medium text-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 sm:w-auto dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">Sign In</button>
-                </form>
-            </div>
+            <form id="signin-form" class="space-y-4">
+                <div>
+                    <input type="email" required 
+                           class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-colors" 
+                           placeholder="Enter your email">
+                </div>
+                <div>
+                    <input type="password" required 
+                           class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-colors" 
+                           placeholder="Enter your password">
+                </div>
+                <div class="flex items-center justify-between text-sm">
+                    <label class="flex items-center text-gray-600">
+                        <input type="checkbox" class="mr-2 w-4 h-4 text-purple-600 rounded border-gray-300 focus:ring-purple-500">
+                        Remember me
+                    </label>
+                    <a href="#" class="text-purple-600 hover:text-purple-700">Forgot password?</a>
+                </div>
+                <button type="submit" class="w-full bg-purple-600 text-white py-2.5 px-4 rounded-lg font-medium hover:bg-purple-700 focus:ring-4 focus:ring-purple-200 transition-colors">
+                    Sign in
+                </button>
+            </form>
 
             <!-- Sign Up Form -->
-            <div id="signup-form" class="hidden">
-                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+            <form id="signup-form" class="space-y-4 hidden">
+                <div class="grid grid-cols-2 gap-3">
+                    <input type="text" required 
+                           class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-colors" 
+                           placeholder="First name">
+                    <input type="text" required 
+                           class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-colors" 
+                           placeholder="Last name">
+                </div>
+                <div>
+                    <input type="email" required 
+                           class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-colors" 
+                           placeholder="Enter your email">
+                </div>
+                <div>
+                    <input type="text" 
+                           class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-colors" 
+                           placeholder="Company name (optional)">
+                </div>
+                <div>
+                    <input type="password" required 
+                           class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-colors" 
+                           placeholder="Create password">
+                </div>
+                <div class="flex items-start text-sm">
+                    <input type="checkbox" required class="mr-3 mt-0.5 w-4 h-4 text-purple-600 rounded border-gray-300 focus:ring-purple-500">
+                    <span class="text-gray-600">I agree to the <a href="#" class="text-purple-600 hover:text-purple-700">Terms of Service</a> and <a href="#" class="text-purple-600 hover:text-purple-700">Privacy Policy</a></span>
+                </div>
+                <button type="submit" class="w-full bg-purple-600 text-white py-2.5 px-4 rounded-lg font-medium hover:bg-purple-700 focus:ring-4 focus:ring-purple-200 transition-colors">
                     Create account
-                </h2>
-                <p class="text-gray-500 dark:text-gray-400 mb-6">
-                    Start your free trial today
-                </p>
-                <form class="mt-8 space-y-6" action="#" method="POST">
-                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                        <div>
-                            <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First name</label>
-                            <input type="text" name="first-name" id="first-name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500" placeholder="John" required="">
-                        </div>
-                        <div>
-                            <label for="last-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last name</label>
-                            <input type="text" name="last-name" id="last-name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500" placeholder="Doe" required="">
-                        </div>
-                    </div>
-                    <div>
-                        <label for="signup-email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                        <input type="email" name="email" id="signup-email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500" placeholder="name@company.com" required="">
-                    </div>
-                    <div>
-                        <label for="company" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Company name</label>
-                        <input type="text" name="company" id="company" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500" placeholder="Your Company Inc." required="">
-                    </div>
-                    <div>
-                        <label for="signup-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-                        <input type="password" name="password" id="signup-password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500" required="">
-                    </div>
-                    <div>
-                        <label for="confirm-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
-                        <input type="password" name="confirm-password" id="confirm-password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500" required="">
-                    </div>
-                    <div class="flex items-start">
-                        <div class="flex items-center h-5">
-                            <input id="terms" aria-describedby="terms" type="checkbox" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" required="">
-                        </div>
-                        <div class="ml-3 text-sm">
-                            <label for="terms" class="font-light text-gray-500 dark:text-gray-300">I accept the <a class="font-medium text-purple-600 hover:underline dark:text-purple-500" href="#">Terms and Conditions</a></label>
-                        </div>
-                    </div>
-                    <button type="submit" class="w-full px-5 py-3 text-base font-medium text-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 sm:w-auto dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">Create Account</button>
-                </form>
-            </div>
+                </button>
+            </form>
 
             <!-- Social Login -->
             <div class="mt-6">
                 <div class="relative">
                     <div class="absolute inset-0 flex items-center">
-                        <div class="w-full border-t border-gray-300 dark:border-gray-600"></div>
+                        <div class="w-full border-t border-gray-200"></div>
                     </div>
                     <div class="relative flex justify-center text-sm">
-                        <span class="px-2 bg-white text-gray-500 dark:bg-gray-800 dark:text-gray-400">Or continue with</span>
+                        <span class="px-3 bg-white text-gray-500">or</span>
                     </div>
                 </div>
-                <div class="mt-6 grid grid-cols-2 gap-3">
-                    <button type="button" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-500 bg-white hover:bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-400 dark:hover:bg-gray-600">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84"/>
+                <div class="mt-4 space-y-3">
+                    <button type="button" class="w-full flex items-center justify-center px-3 py-2.5 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
+                        <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24">
+                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
                         </svg>
-                        <span class="ml-2">Google</span>
-                    </button>
-                    <button type="button" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-500 bg-white hover:bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-400 dark:hover:bg-gray-600">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z" clip-rule="evenodd"/>
-                        </svg>
-                        <span class="ml-2">GitHub</span>
+                        Continue with Google
                     </button>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- JavaScript for form switching -->
     <script>
-        document.getElementById('signin-tab').addEventListener('click', function() {
-            // Show sign in form
-            document.getElementById('signin-form').classList.remove('hidden');
-            document.getElementById('signup-form').classList.add('hidden');
-            
-            // Update tab styling
-            document.getElementById('signin-tab').classList.add('text-purple-600', 'bg-purple-50', 'border-purple-600');
-            document.getElementById('signin-tab').classList.remove('text-gray-500', 'border-transparent');
-            
-            document.getElementById('signup-tab').classList.add('text-gray-500', 'border-transparent');
-            document.getElementById('signup-tab').classList.remove('text-purple-600', 'bg-purple-50', 'border-purple-600');
+        const signinTab = document.getElementById('signin-tab');
+        const signupTab = document.getElementById('signup-tab');
+        const signinForm = document.getElementById('signin-form');
+        const signupForm = document.getElementById('signup-form');
+
+        signinTab.addEventListener('click', () => {
+            signinTab.className = 'flex-1 py-2 px-3 text-sm font-medium rounded-md text-gray-900 bg-white shadow-sm';
+            signupTab.className = 'flex-1 py-2 px-3 text-sm font-medium rounded-md text-gray-600 hover:text-gray-900';
+            signinForm.classList.remove('hidden');
+            signupForm.classList.add('hidden');
+            document.querySelector('h1').textContent = 'Welcome back';
+            document.querySelector('p').textContent = 'Sign in to your account';
         });
 
-        document.getElementById('signup-tab').addEventListener('click', function() {
-            // Show sign up form
-            document.getElementById('signup-form').classList.remove('hidden');
-            document.getElementById('signin-form').classList.add('hidden');
-            
-            // Update tab styling
-            document.getElementById('signup-tab').classList.add('text-purple-600', 'bg-purple-50', 'border-purple-600');
-            document.getElementById('signup-tab').classList.remove('text-gray-500', 'border-transparent');
-            
-            document.getElementById('signin-tab').classList.add('text-gray-500', 'border-transparent');
-            document.getElementById('signin-tab').classList.remove('text-purple-600', 'bg-purple-50', 'border-purple-600');
+        signupTab.addEventListener('click', () => {
+            signupTab.className = 'flex-1 py-2 px-3 text-sm font-medium rounded-md text-gray-900 bg-white shadow-sm';
+            signinTab.className = 'flex-1 py-2 px-3 text-sm font-medium rounded-md text-gray-600 hover:text-gray-900';
+            signupForm.classList.remove('hidden');
+            signinForm.classList.add('hidden');
+            document.querySelector('h1').textContent = 'Create account';
+            document.querySelector('p').textContent = 'Start your free trial';
         });
     </script>
 </body>
