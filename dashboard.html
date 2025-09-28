@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+</head>
+<body>
+  <h1>Welcome to your dashboard</h1>
+  <p id="user-info"></p>
+  <button id="logout">Log out</button>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // Check if user is logged in
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        document.getElementById("user-info").textContent = `Logged in as ${user.email}`;
+      } else {
+        window.location.href = "auth.html"; // redirect back if not logged in
+      }
+    });
+
+    // Logout
+    document.getElementById("logout").addEventListener("click", () => {
+      auth.signOut();
+    });
+  </script>
+</body>
+</html>

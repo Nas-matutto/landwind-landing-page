@@ -145,5 +145,58 @@
             document.querySelector('p').textContent = 'Start your free trial';
         });
     </script>
+
+        <!-- Firebase SDK -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+      import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyBg0eb04wDfvoPgQMMv4-5ULWBMP82egxw",
+        authDomain: "talk-to-me-data.firebaseapp.com",
+        projectId: "talk-to-me-data",
+        storageBucket: "talk-to-me-data.firebasestorage.app",
+        messagingSenderId: "143950257839",
+        appId: "1:143950257839:web:6d0b8e75f82d3e24da3e5a"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+
+      // Handle Sign Up
+      const signupForm = document.getElementById('signup-form');
+      signupForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = signupForm.querySelector('input[type="email"]').value;
+        const password = signupForm.querySelector('input[type="password"]').value;
+
+        createUserWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            console.log("User signed up:", userCredential.user);
+            window.location.href = "dashboard.html"; // redirect after signup
+          })
+          .catch((error) => {
+            alert(error.message);
+          });
+      });
+
+      // Handle Sign In
+      const signinForm = document.getElementById('signin-form');
+      signinForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = signinForm.querySelector('input[type="email"]').value;
+        const password = signinForm.querySelector('input[type="password"]').value;
+
+        signInWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            console.log("User signed in:", userCredential.user);
+            window.location.href = "dashboard.html"; // redirect after login
+          })
+          .catch((error) => {
+            alert(error.message);
+          });
+      });
+    </script>
+
 </body>
 </html>

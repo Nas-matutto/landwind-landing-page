@@ -626,5 +626,36 @@
         </div>
     </footer>
     <script src="https://unpkg.com/flowbite@1.4.1/dist/flowbite.js"></script>
+
+     <!-- Firebase SDK -->
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+      import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+
+      // Your Firebase config (replace with your own from Firebase Console)
+      const firebaseConfig = {
+        apiKey: "AIzaSyBg0eb04wDfvoPgQMMv4-5ULWBMP82egxw",
+        authDomain: "talk-to-me-data.firebaseapp.com",
+        projectId: "talk-to-me-data",
+        storageBucket: "talk-to-me-data.firebasestorage.app",
+        messagingSenderId: "143950257839",
+        appId: "1:143950257839:web:6d0b8e75f82d3e24da3e5a"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+
+      // Optional: check if user is logged in
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          console.log("User is logged in:", user.email);
+        } else {
+          console.log("No user logged in");
+        }
+      });
+    </script>
+
 </body>
 </html>
