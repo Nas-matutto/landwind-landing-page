@@ -54,62 +54,61 @@
             </div>
 
             <!-- Sign In Form -->
-            <form id="signin-form" class="auth-form hidden">
-                <div class="input-group">
-                    <input type="email" id="signin-email" required 
-                           class="form-input" 
-                           placeholder="Enter your email">
-                </div>
-                <div class="input-group">
-                    <input type="password" id="signin-password" required 
-                           class="form-input" 
-                           placeholder="Enter your password">
-                </div>
-                <div class="form-options">
-                    <label class="checkbox-label">
-                        <input type="checkbox" class="checkbox-input">
-                        <span class="checkbox-text">Remember me</span>
-                    </label>
-                    <a href="#" class="forgot-link">Forgot password?</a>
-                </div>
-                <button type="submit" class="submit-btn">
-                    Sign in
-                </button>
-            </form>
+            <div id="signin-form" class="form-container hidden">
+                <form class="auth-form">
+                    <div class="input-group">
+                        <input type="email" id="signin-email" required 
+                               class="form-input" 
+                               placeholder="Enter your email">
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="signin-password" required 
+                               class="form-input" 
+                               placeholder="Enter your password">
+                    </div>
+                    <div class="form-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" class="checkbox-input">
+                            <span class="checkbox-text">Remember me</span>
+                        </label>
+                        <a href="#" class="forgot-link">Forgot password?</a>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        Sign in
+                    </button>
+                </form>
+            </div>
 
             <!-- Sign Up Form -->
-            <form id="signup-form" class="auth-form">
-                <div class="name-grid">
-                    <input type="text" id="firstName" required 
-                           class="form-input" 
-                           placeholder="First name">
-                    <input type="text" id="lastName" required 
-                           class="form-input" 
-                           placeholder="Last name">
-                </div>
-                <div class="input-group">
-                    <input type="email" id="signup-email" required 
-                           class="form-input" 
-                           placeholder="Enter your email">
-                </div>
-                <div class="input-group">
-                    <input type="text" id="company"
-                           class="form-input" 
-                           placeholder="Company name (optional)">
-                </div>
-                <div class="input-group">
-                    <input type="password" id="signup-password" required 
-                           class="form-input" 
-                           placeholder="Create password">
-                </div>
-                <div class="terms-section">
-                    <input type="checkbox" required class="checkbox-input" id="terms">
-                    <label for="terms" class="terms-text">I agree to the <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="terms-link">Privacy Policy</a></label>
-                </div>
-                <button type="submit" class="submit-btn">
-                    Create account
-                </button>
-            </form>
+            <div id="signup-form" class="form-container">
+                <form class="auth-form">
+                    <div class="name-grid">
+                        <input type="text" id="firstName" required 
+                               class="form-input" 
+                               placeholder="First name">
+                        <input type="text" id="lastName" required 
+                               class="form-input" 
+                               placeholder="Last name">
+                    </div>
+                    <div class="input-group">
+                        <input type="email" id="signup-email" required 
+                               class="form-input" 
+                               placeholder="Enter your email">
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="signup-password" required 
+                               class="form-input" 
+                               placeholder="Create password">
+                    </div>
+                    <div class="terms-section">
+                        <input type="checkbox" required class="checkbox-input" id="terms">
+                        <label for="terms" class="terms-text">I agree to the <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="terms-link">Privacy Policy</a></label>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        Create account
+                    </button>
+                </form>
+            </div>
 
             <!-- Social Login -->
             <div class="social-section">
@@ -168,16 +167,15 @@
         });
 
         // Form submissions
-        signupForm.addEventListener('submit', async (e) => {
+        signupForm.querySelector('form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('signup-email').value;
             const password = document.getElementById('signup-password').value;
             const firstName = document.getElementById('firstName').value;
             const lastName = document.getElementById('lastName').value;
-            const company = document.getElementById('company').value;
 
             try {
-                await signUp(email, password, firstName, lastName, company);
+                await signUp(email, password, firstName, lastName, ''); // Empty company field
                 showMessage('Account created successfully!');
                 setTimeout(() => window.location.href = 'dashboard.html', 2000);
             } catch (error) {
@@ -185,7 +183,7 @@
             }
         });
 
-        signinForm.addEventListener('submit', async (e) => {
+        signinForm.querySelector('form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('signin-email').value;
             const password = document.getElementById('signin-password').value;
@@ -386,10 +384,13 @@
             color: #1e293b;
         }
 
+        .form-container {
+            margin-bottom: 32px;
+        }
+
         .auth-form {
             display: grid;
             gap: 20px;
-            margin-bottom: 32px;
         }
 
         .input-group {
@@ -562,6 +563,11 @@
         .google-icon {
             width: 20px;
             height: 20px;
+        }
+
+        /* Hide/Show forms */
+        .hidden {
+            display: none;
         }
 
         /* Mobile Responsive Design */
