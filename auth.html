@@ -20,7 +20,7 @@
     <header class="bg-white/80 backdrop-blur-xl shadow-sm border-b border-purple-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-start items-center h-20">
-                <a href="index.html" class="flex items-center text-gray-900 hover:text-gray-700 transition-colors">
+                <a href="/" class="flex items-center text-gray-900 hover:text-gray-700 transition-colors">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                     </svg>
@@ -177,7 +177,7 @@
             try {
                 await signUp(email, password, firstName, lastName, ''); // Empty company field
                 showMessage('Account created successfully!');
-                setTimeout(() => window.location.href = 'dashboard.html', 2000);
+                setTimeout(() => window.location.href = '/welcome', 2000);
             } catch (error) {
                 showMessage(error.message, true);
             }
@@ -191,7 +191,7 @@
             try {
                 await signIn(email, password);
                 showMessage('Signed in successfully!');
-                setTimeout(() => window.location.href = 'dashboard.html', 2000);
+                setTimeout(() => window.location.href = '/welcome', 2000);
             } catch (error) {
                 showMessage(error.message, true);
             }
@@ -202,7 +202,7 @@
             try {
                 await signInWithGoogle();
                 showMessage('Signed in with Google successfully!');
-                setTimeout(() => window.location.href = 'dashboard.html', 2000);
+                setTimeout(() => window.location.href = '/welcome', 2000);
             } catch (error) {
                 showMessage(error.message, true);
             }

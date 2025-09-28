@@ -1,0 +1,38 @@
+{
+  "redirects": [
+    {
+      "source": "/auth.html",
+      "destination": "/signin",
+      "permanent": true
+    },
+    {
+      "source": "/dashboard.html", 
+      "destination": "/welcome",
+      "permanent": true
+    },
+    {
+      "source": "/dashboard2.html",
+      "destination": "/onboarding", 
+      "permanent": true
+    },
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/signin",
+      "destination": "/auth.html"
+    },
+    {
+      "source": "/welcome",
+      "destination": "/dashboard.html"  
+    },
+    {
+      "source": "/onboarding",
+      "destination": "/dashboard2.html"
+    }
+  ]
+}
