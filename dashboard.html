@@ -1,43 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Talk To Me Data</title>
+    <link href="./output.css" rel="stylesheet">
 </head>
-<body>
-  <h1>Welcome to your dashboard</h1>
-  <p id="user-info"></p>
-  <button id="logout">Log out</button>
+<body class="min-h-screen bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <img src="./images/logo.svg" class="h-8 mr-3" alt="Talk To Me Data">
+                    <span class="text-xl font-semibold text-gray-900">Talk To Me Data</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span id="user-info" class="text-gray-700"></span>
+                    <button id="logout" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                        Log out
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
 
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"></script>
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <div class="px-4 py-6 sm:px-0">
+            <div class="border-4 border-dashed border-gray-200 rounded-lg p-8">
+                <h1 class="text-3xl font-bold text-gray-900 mb-4">Welcome to your Dashboard</h1>
+                <p class="text-gray-600">This is where you'll access your data insights and ask questions to your data.</p>
+            </div>
+        </div>
+    </main>
 
-  <script>
-    const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT.firebaseapp.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_PROJECT.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID"
-    };
+    <script type="module">
+        import { auth, onAuthStateChanged, logOut } from './js/auth.js';
 
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
+        // Check if user is logged in
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById("user-info").textContent = `Welcome, ${user.email}`;
+            } else {
+                window.location.href = "auth.html";
+            }
+        });
 
-    // Check if user is logged in
-    auth.onAuthStateChanged(user => {
-      if (user) {
-        document.getElementById("user-info").textContent = `Logged in as ${user.email}`;
-      } else {
-        window.location.href = "auth.html"; // redirect back if not logged in
-      }
-    });
-
-    // Logout
-    document.getElementById("logout").addEventListener("click", () => {
-      auth.signOut();
-    });
-  </script>
+        // Logout functionality
+        document.getElementById("logout").addEventListener("click", async () => {
+            try {
+                await logOut();
+                window.location.href = "index.html";
+            } catch (error) {
+                console.error('Logout error:', error);
+            }
+        });
+    </script>
 </body>
 </html>

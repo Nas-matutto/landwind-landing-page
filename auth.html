@@ -28,6 +28,9 @@
                 <p class="text-gray-600">Start your free trial</p>
             </div>
 
+            <!-- Error/Success Messages -->
+            <div id="message" class="hidden mb-4 p-3 rounded-lg"></div>
+
             <!-- Auth Toggle -->
             <div class="flex mb-6 p-1 bg-gray-100 rounded-lg">
                 <button id="signin-tab" class="flex-1 py-2 px-3 text-sm font-medium rounded-md text-gray-600 hover:text-gray-900">
@@ -41,12 +44,12 @@
             <!-- Sign In Form -->
             <form id="signin-form" class="space-y-4 hidden">
                 <div>
-                    <input type="email" required 
+                    <input type="email" id="signin-email" required 
                            class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-colors" 
                            placeholder="Enter your email">
                 </div>
                 <div>
-                    <input type="password" required 
+                    <input type="password" id="signin-password" required 
                            class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-colors" 
                            placeholder="Enter your password">
                 </div>
@@ -65,25 +68,25 @@
             <!-- Sign Up Form -->
             <form id="signup-form" class="space-y-4">
                 <div class="grid grid-cols-2 gap-3">
-                    <input type="text" required 
+                    <input type="text" id="firstName" required 
                            class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-colors" 
                            placeholder="First name">
-                    <input type="text" required 
+                    <input type="text" id="lastName" required 
                            class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-colors" 
                            placeholder="Last name">
                 </div>
                 <div>
-                    <input type="email" required 
+                    <input type="email" id="signup-email" required 
                            class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-colors" 
                            placeholder="Enter your email">
                 </div>
                 <div>
-                    <input type="text" 
+                    <input type="text" id="company"
                            class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-colors" 
                            placeholder="Company name (optional)">
                 </div>
                 <div>
-                    <input type="password" required 
+                    <input type="password" id="signup-password" required 
                            class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-colors" 
                            placeholder="Create password">
                 </div>
@@ -107,7 +110,7 @@
                     </div>
                 </div>
                 <div class="mt-4 space-y-3">
-                    <button type="button" class="w-full flex items-center justify-center px-3 py-2.5 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
+                    <button type="button" id="google-signin" class="w-full flex items-center justify-center px-3 py-2.5 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
                         <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24">
                             <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                             <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -121,12 +124,24 @@
         </div>
     </main>
 
-    <script>
+    <script type="module">
+        import { signUp, signIn, signInWithGoogle } from './js/auth.js';
+
+        // UI Elements
         const signinTab = document.getElementById('signin-tab');
         const signupTab = document.getElementById('signup-tab');
         const signinForm = document.getElementById('signin-form');
         const signupForm = document.getElementById('signup-form');
+        const messageDiv = document.getElementById('message');
 
+        function showMessage(message, isError = false) {
+            messageDiv.textContent = message;
+            messageDiv.className = `mb-4 p-3 rounded-lg ${isError ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`;
+            messageDiv.classList.remove('hidden');
+            setTimeout(() => messageDiv.classList.add('hidden'), 5000);
+        }
+
+        // Tab switching
         signinTab.addEventListener('click', () => {
             signinTab.className = 'flex-1 py-2 px-3 text-sm font-medium rounded-md text-gray-900 bg-white shadow-sm';
             signupTab.className = 'flex-1 py-2 px-3 text-sm font-medium rounded-md text-gray-600 hover:text-gray-900';
@@ -144,58 +159,48 @@
             document.querySelector('h1').textContent = 'Create account';
             document.querySelector('p').textContent = 'Start your free trial';
         });
-    </script>
+        // Form submissions
+        signupForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const company = document.getElementById('company').value;
 
-        <!-- Firebase SDK -->
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
-      import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+            try {
+                await signUp(email, password, firstName, lastName, company);
+                showMessage('Account created successfully!');
+                setTimeout(() => window.location.href = 'dashboard.html', 2000);
+            } catch (error) {
+                showMessage(error.message, true);
+            }
+        });
 
-      const firebaseConfig = {
-        apiKey: "AIzaSyBg0eb04wDfvoPgQMMv4-5ULWBMP82egxw",
-        authDomain: "talk-to-me-data.firebaseapp.com",
-        projectId: "talk-to-me-data",
-        storageBucket: "talk-to-me-data.firebasestorage.app",
-        messagingSenderId: "143950257839",
-        appId: "1:143950257839:web:6d0b8e75f82d3e24da3e5a"
-      };
+        signinForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('signin-email').value;
+            const password = document.getElementById('signin-password').value;
 
-      const app = initializeApp(firebaseConfig);
-      const auth = getAuth(app);
+            try {
+                await signIn(email, password);
+                showMessage('Signed in successfully!');
+                setTimeout(() => window.location.href = 'dashboard.html', 2000);
+            } catch (error) {
+                showMessage(error.message, true);
+            }
+        });
 
-      // Handle Sign Up
-      const signupForm = document.getElementById('signup-form');
-      signupForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const email = signupForm.querySelector('input[type="email"]').value;
-        const password = signupForm.querySelector('input[type="password"]').value;
-
-        createUserWithEmailAndPassword(auth, email, password)
-          .then((userCredential) => {
-            console.log("User signed up:", userCredential.user);
-            window.location.href = "dashboard.html"; // redirect after signup
-          })
-          .catch((error) => {
-            alert(error.message);
-          });
-      });
-
-      // Handle Sign In
-      const signinForm = document.getElementById('signin-form');
-      signinForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const email = signinForm.querySelector('input[type="email"]').value;
-        const password = signinForm.querySelector('input[type="password"]').value;
-
-        signInWithEmailAndPassword(auth, email, password)
-          .then((userCredential) => {
-            console.log("User signed in:", userCredential.user);
-            window.location.href = "dashboard.html"; // redirect after login
-          })
-          .catch((error) => {
-            alert(error.message);
-          });
-      });
+        // Google authentication
+        document.getElementById('google-signin').addEventListener('click', async () => {
+            try {
+                await signInWithGoogle();
+                showMessage('Signed in with Google successfully!');
+                setTimeout(() => window.location.href = 'dashboard.html', 2000);
+            } catch (error) {
+                showMessage(error.message, true);
+            }
+        });
     </script>
 
 </body>
