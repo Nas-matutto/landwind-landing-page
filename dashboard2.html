@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Video - Talk Data To Me</title>
+    <link href="./output.css" rel="stylesheet">
+</head>
+<body class="min-h-screen bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <img src="./images/logo.svg" class="h-8 mr-3" alt="Talk Data To Me">
+                    <span class="text-xl font-semibold text-gray-900">Talk Data To Me</span>
+                </div>
+                <div class="flex items-center">
+                    <button id="logout" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                        Log out
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h1 class="text-3xl font-bold text-gray-900 mb-4">Welcome to Talk Data To Me!</h1>
+            <p class="text-lg text-gray-600 mb-8">Watch this quick video to get started</p>
+            
+            <!-- Video placeholder -->
+            <div class="bg-gray-200 rounded-lg h-96 flex items-center justify-center">
+                <p class="text-gray-500">Video will be embedded here</p>
+            </div>
+        </div>
+    </main>
+
+    <script type="module">
+        import { auth, onAuthStateChanged, logOut } from './js/auth.js';
+
+        // Check if user is logged in
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                window.location.href = "auth.html";
+            }
+        });
+
+        // Logout functionality
+        document.getElementById("logout").addEventListener("click", async () => {
+            try {
+                await logOut();
+                window.location.href = "index.html";
+            } catch (error) {
+                console.error('Logout error:', error);
+            }
+        });
+    </script>
+</body>
+</html>
