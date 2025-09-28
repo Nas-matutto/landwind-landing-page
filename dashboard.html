@@ -24,7 +24,7 @@
                     <span class="text-xl font-bold text-gray-900">Talk Data To Me</span>
                 </div>
                 <div class="flex items-center">
-                    <button id="logout" class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2.5 rounded-xl font-medium hover:from-purple-700 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                    <button id="logout" class="logout-btn">
                         Log out
                     </button>
                 </div>
@@ -33,7 +33,7 @@
     </header>
 
     <!-- Main Content -->
-    <main class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <main class="main-container">
         <div class="onboarding-container">
             <!-- Welcome Section -->
             <div class="welcome-section">
@@ -300,6 +300,33 @@
             66% { transform: translateY(15px) rotate(240deg) scale(0.9); }
         }
 
+        .logout-btn {
+            background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+            color: white;
+            padding: 10px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(139, 92, 246, 0.3);
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4);
+            background: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%);
+        }
+
+        .main-container {
+            min-height: calc(100vh - 80px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 16px;
+        }
+
         .onboarding-container {
             width: 100%;
             max-width: 600px;
@@ -329,17 +356,16 @@
         }
 
         .welcome-title {
-            font-size: 3.5rem;
-            font-weight: 800;
+            font-size: 1.75rem;
+            font-weight: 700;
             background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
             background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             animation: gradientShift 4s ease-in-out infinite;
-            text-shadow: 0 0 40px rgba(59, 130, 246, 0.3);
             margin: 0 0 16px 0;
-            line-height: 1.1;
+            line-height: 1.2;
         }
 
         .welcome-subtitle {
@@ -499,8 +525,8 @@
 
         /* Mobile Responsive Design */
         @media (max-width: 768px) {
-            main {
-                padding: 20px 16px;
+            .main-container {
+                padding: 40px 16px;
                 min-height: calc(100vh - 80px);
             }
 
@@ -511,7 +537,7 @@
             }
 
             .welcome-title {
-                font-size: 2.5rem;
+                font-size: 1.5rem;
             }
 
             .welcome-subtitle {
@@ -548,8 +574,12 @@
         }
 
         @media (max-width: 480px) {
+            .main-container {
+                padding: 30px 12px;
+            }
+
             .welcome-title {
-                font-size: 2rem;
+                font-size: 1.375rem;
             }
 
             .onboarding-container {
@@ -575,7 +605,7 @@
         /* Extra small devices */
         @media (max-width: 320px) {
             .welcome-title {
-                font-size: 1.75rem;
+                font-size: 1.25rem;
             }
 
             .onboarding-container {
