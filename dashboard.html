@@ -5,18 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Setup - Talk Data To Me</title>
     <link href="./output.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
-<body class="min-h-screen bg-gray-50">
+<body class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
+    <!-- Floating Elements -->
+    <div class="floating-elements">
+        <div class="floating-circle"></div>
+        <div class="floating-circle"></div>
+        <div class="floating-circle"></div>
+    </div>
+
     <!-- Header -->
-    <header class="bg-white shadow">
+    <header class="bg-white/80 backdrop-blur-xl shadow-sm border-b border-purple-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
                     <img src="./images/logo.svg" class="h-8 mr-3" alt="Talk Data To Me">
-                    <span class="text-xl font-semibold text-gray-900">Talk Data To Me</span>
+                    <span class="text-xl font-bold text-gray-900">Talk Data To Me</span>
                 </div>
                 <div class="flex items-center">
-                    <button id="logout" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                    <button id="logout" class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2.5 rounded-xl font-medium hover:from-purple-700 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                         Log out
                     </button>
                 </div>
@@ -25,29 +33,28 @@
     </header>
 
     <!-- Main Content -->
-    <main class="max-w-2xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <div class="bg-white rounded-lg shadow p-8">
+    <main class="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div class="onboarding-container">
             <!-- Welcome Section -->
-            <div class="text-center mb-8">
-                <h1 id="welcome-message" class="text-3xl font-bold text-gray-900 mb-2">Hi there!</h1>
-                <p class="text-lg text-gray-600">Let's get you set up in under 2 minutes!</p>
+            <div class="welcome-section">
+                <h1 id="welcome-message" class="welcome-title">Hi there!</h1>
+                <p class="welcome-subtitle">Let's get you set up in under 2 minutes!</p>
             </div>
 
             <!-- Onboarding Form -->
-            <form id="onboarding-form" class="space-y-6">
+            <form id="onboarding-form" class="onboarding-form">
                 <!-- Brand Name -->
-                <div>
-                    <label for="brandName" class="block text-sm font-medium text-gray-700 mb-2">What's the name of your Brand?</label>
+                <div class="input-group">
+                    <label for="brandName" class="input-label">What's the name of your Brand?</label>
                     <input type="text" id="brandName" name="brandName" required 
-                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                           class="form-input"
                            placeholder="Enter your brand name">
                 </div>
 
                 <!-- Country -->
-                <div>
-                    <label for="country" class="block text-sm font-medium text-gray-700 mb-2">Where is your brand primarily based?</label>
-                    <select id="country" name="country" required 
-                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                <div class="input-group">
+                    <label for="country" class="input-label">Where is your brand primarily based?</label>
+                    <select id="country" name="country" required class="form-select">
                         <option value="">Select a country</option>
                         <option value="United States">United States</option>
                         <option value="United Kingdom">United Kingdom</option>
@@ -72,10 +79,9 @@
                 </div>
 
                 <!-- Monthly Revenue -->
-                <div>
-                    <label for="revenue" class="block text-sm font-medium text-gray-700 mb-2">What is your Brand's bracket of Monthly revenue?</label>
-                    <select id="revenue" name="revenue" required 
-                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                <div class="input-group">
+                    <label for="revenue" class="input-label">What is your Brand's bracket of Monthly revenue?</label>
+                    <select id="revenue" name="revenue" required class="form-select">
                         <option value="">Select revenue bracket</option>
                         <option value="$0 - $1k">$0 - $1k</option>
                         <option value="$1k - $10k">$1k - $10k</option>
@@ -86,49 +92,48 @@
                 </div>
 
                 <!-- Ad Types -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">What type of Ads do you run? (Select all that apply)</label>
-                    <div class="space-y-2">
-                        <label class="flex items-center">
-                            <input type="checkbox" name="adTypes" value="Meta Ads" class="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500">
-                            <span class="ml-2 text-sm text-gray-700">Meta Ads</span>
+                <div class="input-group">
+                    <label class="input-label">What type of Ads do you run? (Select all that apply)</label>
+                    <div class="checkbox-grid">
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="adTypes" value="Meta Ads" class="checkbox-input">
+                            <span class="checkbox-label">Meta Ads</span>
                         </label>
-                        <label class="flex items-center">
-                            <input type="checkbox" name="adTypes" value="Google Ads" class="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500">
-                            <span class="ml-2 text-sm text-gray-700">Google Ads</span>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="adTypes" value="Google Ads" class="checkbox-input">
+                            <span class="checkbox-label">Google Ads</span>
                         </label>
-                        <label class="flex items-center">
-                            <input type="checkbox" name="adTypes" value="TikTok Ads" class="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500">
-                            <span class="ml-2 text-sm text-gray-700">TikTok Ads</span>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="adTypes" value="TikTok Ads" class="checkbox-input">
+                            <span class="checkbox-label">TikTok Ads</span>
                         </label>
-                        <label class="flex items-center">
-                            <input type="checkbox" name="adTypes" value="LinkedIn Ads" class="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500">
-                            <span class="ml-2 text-sm text-gray-700">LinkedIn Ads</span>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="adTypes" value="LinkedIn Ads" class="checkbox-input">
+                            <span class="checkbox-label">LinkedIn Ads</span>
                         </label>
-                        <label class="flex items-center">
-                            <input type="checkbox" name="adTypes" value="Snapchat Ads" class="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500">
-                            <span class="ml-2 text-sm text-gray-700">Snapchat Ads</span>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="adTypes" value="Snapchat Ads" class="checkbox-input">
+                            <span class="checkbox-label">Snapchat Ads</span>
                         </label>
-                        <label class="flex items-center">
-                            <input type="checkbox" name="adTypes" value="Others" class="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500">
-                            <span class="ml-2 text-sm text-gray-700">Others</span>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="adTypes" value="Others" class="checkbox-input">
+                            <span class="checkbox-label">Others</span>
                         </label>
                     </div>
                 </div>
 
                 <!-- Ad Budget -->
-                <div>
-                    <label for="adBudget" class="block text-sm font-medium text-gray-700 mb-2">What is your Brand's monthly Ad budget?</label>
+                <div class="input-group">
+                    <label for="adBudget" class="input-label">What is your Brand's monthly Ad budget?</label>
                     <input type="text" id="adBudget" name="adBudget" required 
-                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                           class="form-input budget-input"
                            placeholder="e.g., $5,000">
                 </div>
 
                 <!-- E-commerce Platform -->
-                <div>
-                    <label for="platform" class="block text-sm font-medium text-gray-700 mb-2">What powers your e-commerce store?</label>
-                    <select id="platform" name="platform" required 
-                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                <div class="input-group">
+                    <label for="platform" class="input-label">What powers your e-commerce store?</label>
+                    <select id="platform" name="platform" required class="form-select">
                         <option value="">Select platform</option>
                         <option value="Shopify">Shopify</option>
                         <option value="WooCommerce">WooCommerce</option>
@@ -142,9 +147,12 @@
                 </div>
 
                 <!-- Submit Button -->
-                <div class="pt-4">
-                    <button type="submit" class="w-full bg-purple-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-purple-700 transition-colors">
+                <div class="submit-section">
+                    <button type="submit" class="submit-btn">
                         Continue
+                        <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                        </svg>
                     </button>
                 </div>
             </form>
@@ -220,18 +228,7 @@
 
         // Function to send data to Google Sheets
         async function sendToGoogleSheets(data) {
-            // You'll need to set up a Google Apps Script web app for this
-            // For now, this will just log the data
             console.log('Data to send to Google Sheets:', data);
-            
-            // Example implementation:
-            // const response = await fetch('YOUR_GOOGLE_APPS_SCRIPT_URL', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify(data)
-            // });
         }
 
         // Logout functionality
@@ -244,5 +241,300 @@
             }
         });
     </script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            color: #0f172a;
+            overflow-x: hidden;
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, rgba(147, 51, 234, 0.08), rgba(59, 130, 246, 0.08));
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .floating-circle:nth-child(1) {
+            width: 120px;
+            height: 120px;
+            top: 15%;
+            left: 8%;
+            animation-delay: 0s;
+        }
+
+        .floating-circle:nth-child(2) {
+            width: 180px;
+            height: 180px;
+            top: 55%;
+            right: 10%;
+            animation-delay: 3s;
+        }
+
+        .floating-circle:nth-child(3) {
+            width: 90px;
+            height: 90px;
+            bottom: 25%;
+            left: 15%;
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+            33% { transform: translateY(-30px) rotate(120deg) scale(1.1); }
+            66% { transform: translateY(15px) rotate(240deg) scale(0.9); }
+        }
+
+        .onboarding-container {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 32px;
+            padding: 48px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(147, 51, 234, 0.15);
+            box-shadow: 
+                0 32px 64px rgba(147, 51, 234, 0.1),
+                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .onboarding-container:hover {
+            transform: translateY(-8px);
+            box-shadow: 
+                0 40px 80px rgba(147, 51, 234, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+        }
+
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 48px;
+            position: relative;
+        }
+
+        .welcome-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease-in-out infinite;
+            text-shadow: 0 0 40px rgba(59, 130, 246, 0.3);
+            margin: 0 0 16px 0;
+            line-height: 1.1;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.375rem;
+            color: #64748b;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .onboarding-form {
+            display: grid;
+            gap: 32px;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 1.1rem;
+            letter-spacing: -0.025em;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 20px 24px;
+            border: 2px solid rgba(147, 51, 234, 0.15);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.8);
+            color: #1e293b;
+            font-size: 1.05rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            outline: none;
+        }
+
+        .form-input:focus, .form-select:focus {
+            border-color: #8b5cf6;
+            box-shadow: 
+                0 0 0 4px rgba(139, 92, 246, 0.1),
+                0 8px 32px rgba(139, 92, 246, 0.15);
+            background: rgba(255, 255, 255, 0.95);
+            transform: translateY(-2px);
+        }
+
+        .form-input::placeholder {
+            color: #94a3b8;
+            font-weight: 400;
+        }
+
+        .budget-input {
+            background: linear-gradient(135deg, rgba(147, 51, 234, 0.05), rgba(59, 130, 246, 0.05));
+            border: 2px solid rgba(147, 51, 234, 0.25);
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 8px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.6);
+            border: 2px solid rgba(147, 51, 234, 0.1);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .checkbox-item:hover {
+            background: rgba(147, 51, 234, 0.05);
+            border-color: rgba(147, 51, 234, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .checkbox-item:has(.checkbox-input:checked) {
+            background: linear-gradient(135deg, rgba(147, 51, 234, 0.1), rgba(59, 130, 246, 0.1));
+            border-color: #8b5cf6;
+            box-shadow: 0 8px 32px rgba(139, 92, 246, 0.15);
+        }
+
+        .checkbox-input {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            accent-color: #8b5cf6;
+            transform: scale(1.2);
+        }
+
+        .checkbox-label {
+            font-weight: 500;
+            color: #1e293b;
+            font-size: 0.95rem;
+        }
+
+        .submit-section {
+            margin-top: 24px;
+            text-align: center;
+        }
+
+        .submit-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+            color: white;
+            padding: 20px 48px;
+            border: none;
+            border-radius: 16px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 8px 32px rgba(139, 92, 246, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 16px 48px rgba(139, 92, 246, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .btn-icon {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .submit-btn:hover .btn-icon {
+            transform: translateX(4px);
+        }
+
+        @media (max-width: 768px) {
+            .onboarding-container {
+                padding: 32px 24px;
+                margin: 16px;
+                border-radius: 24px;
+            }
+
+            .welcome-title {
+                font-size: 2.5rem;
+            }
+
+            .welcome-subtitle {
+                font-size: 1.125rem;
+            }
+
+            .checkbox-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-input, .form-select {
+                padding: 16px 20px;
+                font-size: 1rem;
+            }
+
+            .submit-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 18px 32px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+
+            .onboarding-container {
+                padding: 24px 16px;
+            }
+        }
+    </style>
 </body>
 </html>
