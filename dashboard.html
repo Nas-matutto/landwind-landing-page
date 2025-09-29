@@ -159,114 +159,111 @@
         </div>
     </main>
 
-    <script type="module">
-        import { auth, onAuthStateChanged, logOut } from './js/auth.js';
-        import { getFirestore, doc, setDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
-        import { firebaseConfig } from './js/firebase-config.js';
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+<script type="module">
+    import { auth, onAuthStateChanged, logOut } from './js/auth.js';
+    import { getFirestore, doc, setDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+    import { firebaseConfig } from './js/firebase-config.js';
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
 
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
-        // Check if user is logged in and get their info
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                try {
-                    // Try to get user data from Firestore
-                    const userDoc = await getDoc(doc(db, 'users', user.uid));
-                    if (userDoc.exists()) {
-                        const userData = userDoc.data();
-                        const displayName = userData.firstName || user.email;
-                        document.getElementById("welcome-message").textContent = `Hi ${displayName}!`;
-                    } else {
-                        document.getElementById("welcome-message").textContent = `Hi ${user.email}!`;
-                    }
-                } catch (error) {
+    // Check if user is logged in and get their info
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            try {
+                // Try to get user data from Firestore
+                const userDoc = await getDoc(doc(db, 'users', user.uid));
+                if (userDoc.exists()) {
+                    const userData = userDoc.data();
+                    const displayName = userData.firstName || user.email;
+                    document.getElementById("welcome-message").textContent = `Hi ${displayName}!`;
+                } else {
                     document.getElementById("welcome-message").textContent = `Hi ${user.email}!`;
                 }
-            } else {
-                window.location.href = "/signin";
-            }
-        });
-
-        // Handle form submission
-        document.getElementById("onboarding-form").addEventListener("submit", async (e) => {
-            e.preventDefault();
-            
-            const formData = new FormData(e.target);
-            const adTypes = [];
-            formData.getAll('adTypes').forEach(type => adTypes.push(type));
-            
-            const onboardingData = {
-                brandName: formData.get('brandName'),
-                country: formData.get('country'),
-                revenue: formData.get('revenue'),
-                adTypes: adTypes,
-                adBudget: formData.get('adBudget'),
-                platform: formData.get('platform'),
-                completedAt: new Date()
-            };
-
-            try {
-                // Save to Firestore
-                if (auth.currentUser) {
-                    await setDoc(doc(db, 'users', auth.currentUser.uid), {
-                        onboarding: onboardingData
-                    }, { merge: true });
-                }
-
-                // Function to send data to Google Sheets
-                async function sendToGoogleSheets(data) {
-                    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby5TRUPlgJyUK8KdVwivFbt63CxgmMdGoZTIK5MPkZP0Ya_xqjW2-7x5tpx1cQO7Yg6Cg/exec'; // Replace with your actual URL
-    
-                // Add user email to the data
-                    const dataWithEmail = {
-                        ...data,
-                        userEmail: auth.currentUser ? auth.currentUser.email : 'Unknown'
-                    };
-    
-                    try {
-        const response = await fetch(GOOGLE_SCRIPT_URL, {
-            method: 'POST',
-            mode: 'no-cors', // Important for Google Apps Script
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(dataWithEmail)
-        });
-        
-        console.log('Data sent to Google Sheets successfully');
-        return true;
-    } catch (error) {
-        console.error('Error sending to Google Sheets:', error);
-        // Don't throw error - we still want to proceed even if sheets fails
-        return false;
-    }
-}
-                
-                // Redirect to dashboard2
-                window.location.href = "/onboarding";
             } catch (error) {
-                console.error('Error saving data:', error);
-                alert('There was an error saving your information. Please try again.');
+                document.getElementById("welcome-message").textContent = `Hi ${user.email}!`;
             }
-        });
-
-        // Function to send data to Google Sheets
-        async function sendToGoogleSheets(data) {
-            console.log('Data to send to Google Sheets:', data);
+        } else {
+            window.location.href = "/signin";
         }
+    });
 
-        // Logout functionality
-        document.getElementById("logout").addEventListener("click", async () => {
-            try {
-                await logOut();
-                window.location.href = "/";
-            } catch (error) {
-                console.error('Logout error:', error);
+    // Function to send data to Google Sheets (define ONCE, outside the form handler)
+    async function sendToGoogleSheets(data) {
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby5TRUPlgJyUK8KdVwivFbt63CxgmMdGoZTIK5MPkZP0Ya_xqjW2-7x5tpx1cQO7Yg6Cg/exec';
+        
+        // Add user email to the data
+        const dataWithEmail = {
+            ...data,
+            userEmail: auth.currentUser ? auth.currentUser.email : 'Unknown'
+        };
+        
+        try {
+            const response = await fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dataWithEmail)
+            });
+            
+            console.log('Data sent to Google Sheets successfully');
+            return true;
+        } catch (error) {
+            console.error('Error sending to Google Sheets:', error);
+            return false;
+        }
+    }
+
+    // Handle form submission
+    document.getElementById("onboarding-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData(e.target);
+        const adTypes = [];
+        formData.getAll('adTypes').forEach(type => adTypes.push(type));
+        
+        const onboardingData = {
+            brandName: formData.get('brandName'),
+            country: formData.get('country'),
+            revenue: formData.get('revenue'),
+            adTypes: adTypes,
+            adBudget: formData.get('adBudget'),
+            platform: formData.get('platform'),
+            completedAt: new Date()
+        };
+
+        try {
+            // Save to Firestore
+            if (auth.currentUser) {
+                await setDoc(doc(db, 'users', auth.currentUser.uid), {
+                    onboarding: onboardingData
+                }, { merge: true });
             }
-        });
-    </script>
+
+            // Send to Google Sheets - ACTUALLY CALL THE FUNCTION
+            await sendToGoogleSheets(onboardingData);
+            
+            // Redirect to onboarding page
+            window.location.href = "/onboarding";
+        } catch (error) {
+            console.error('Error saving data:', error);
+            alert('There was an error saving your information. Please try again.');
+        }
+    });
+
+    // Logout functionality
+    document.getElementById("logout").addEventListener("click", async () => {
+        try {
+            await logOut();
+            window.location.href = "/";
+        } catch (error) {
+            console.error('Logout error:', error);
+        }
+    });
+</script>
 
     <style>
         * {
