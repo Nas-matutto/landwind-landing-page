@@ -215,8 +215,34 @@
                     }, { merge: true });
                 }
 
-                // Send to Google Sheets (you'll need to set this up)
-                await sendToGoogleSheets(onboardingData);
+                // Function to send data to Google Sheets
+                async function sendToGoogleSheets(data) {
+                    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby5TRUPlgJyUK8KdVwivFbt63CxgmMdGoZTIK5MPkZP0Ya_xqjW2-7x5tpx1cQO7Yg6Cg/exec'; // Replace with your actual URL
+    
+                // Add user email to the data
+                    const dataWithEmail = {
+                        ...data,
+                        userEmail: auth.currentUser ? auth.currentUser.email : 'Unknown'
+                    };
+    
+                    try {
+        const response = await fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors', // Important for Google Apps Script
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(dataWithEmail)
+        });
+        
+        console.log('Data sent to Google Sheets successfully');
+        return true;
+    } catch (error) {
+        console.error('Error sending to Google Sheets:', error);
+        // Don't throw error - we still want to proceed even if sheets fails
+        return false;
+    }
+}
                 
                 // Redirect to dashboard2
                 window.location.href = "/onboarding";
