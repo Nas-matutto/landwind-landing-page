@@ -42,12 +42,14 @@
 
             <!-- Video Section -->
             <div class="video-section">
-                <div class="video-placeholder">
-                    <svg class="video-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v3a3 3 0 003 3z"/>
-                    </svg>
-                    <p class="video-text">YouTube Video Placeholder</p>
-                    <p class="video-subtitle">Video will be embedded here</p>
+                <div class="video-container">
+                    <iframe 
+                        src="https://www.youtube.com/embed/KcM20CZ5S7Q" 
+                        title="Talk To Me Data Tutorial" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>
                 </div>
             </div>
 
@@ -219,47 +221,30 @@
             margin-bottom: 48px;
         }
 
-        .video-placeholder {
-            aspect-ratio: 16/9;
-            background: linear-gradient(135deg, rgba(147, 51, 234, 0.1), rgba(59, 130, 246, 0.1));
-            border: 2px dashed rgba(147, 51, 234, 0.3);
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-            transition: all 0.3s ease;
+        .video-container {
             position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
             overflow: hidden;
-        }
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(139, 92, 246, 0.2);
+            transition: all 0.3s ease;
+             }
 
-        .video-placeholder:hover {
-            background: linear-gradient(135deg, rgba(147, 51, 234, 0.15), rgba(59, 130, 246, 0.15));
-            border-color: rgba(147, 51, 234, 0.4);
+        .video-container:hover {
             transform: translateY(-4px);
-            box-shadow: 0 16px 48px rgba(147, 51, 234, 0.2);
-        }
+            box-shadow: 0 16px 48px rgba(139, 92, 246, 0.3);
+            }
 
-        .video-icon {
-            width: 64px;
-            height: 64px;
-            color: #8b5cf6;
-            opacity: 0.8;
-        }
-
-        .video-text {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #1e293b;
-            margin: 0;
-        }
-
-        .video-subtitle {
-            font-size: 1rem;
-            color: #64748b;
-            margin: 0;
-        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            }
 
         .cta-section {
             text-align: center;
